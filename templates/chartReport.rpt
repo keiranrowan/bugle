@@ -61,32 +61,8 @@ table.minimalistBlack tfoot td {
 <div class="topnav">
     <h1 class="topnav h1">{{title}}</h1>
 </div>
-<table class="minimalistBlack">
-<thead>
-    <tr>
-        {% for item in header %}
-            <td>{{item}}</td>
-        {% endfor %}
-    </tr>
-</thead>
-<tbody>
-    {% for row in rows %}
-        <tr>
-            {% for item in rows[row] %}
-                <td>{{item}}</td>
-            {% endfor %}
-        </tr>
-    {% endfor %}
-</tbody>
-<tfoot>
-    <tr>
-        {% for item in footer %}
-            <td>{{item}}</td>
-        {% endfor %}
-    </tr>
-</tfoot>
-</table>
 
-<img src="{{assets}}/{{simpleChart}}" width="700" height="500">
+<img src="{{assets}}/{{salesGraph}}.png" width="700" height="500">
+
 </body>
 </html>

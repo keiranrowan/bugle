@@ -1,44 +1,37 @@
 [
     {
-        "title": "Generic Report",
-        "header": [
-            "Employee ID",
-            "First",
-            "Middle Initial",
-            "Last"
-        ],
-        "footer": [
-            "FOOTER",
-            "FOOTER",
-            "FOOTER",
-            "FOOTER"
-        ],
-        "graph": {
-            "type":"bar",
-            "x": "year",
-            "y": "sales",
-            "year": [
-                2000,
-                2001,
-                2002,
-                2003,
-                2004,
-                2005,
-                2006,
-                2007,
-                2008
-            ],
-            "sales": [
-                450152,
-                651258,
-                725158,
-                612354,
-                501125,
-                772890,
-                490158,
-                501258,
-                601258
-            ]
+        "title": "InfoCorp Sales Report",
+        "graphs": {
+            "salesGraph" : {
+                "type": "bar",
+                "title": "2000-2008 Sales",
+                "x": "year",
+                "y": "sales",
+                "x-label": "Year",
+                "y-label": "Total Sales",
+                "year": [
+                    2000,
+                    2001,
+                    2002,
+                    2003,
+                    2004,
+                    2005,
+                    2006,
+                    2007,
+                    2008
+                ],
+                "sales": [
+                    450152,
+                    651258,
+                    725158,
+                    612354,
+                    501125,
+                    772890,
+                    490158,
+                    501258,
+                    601258
+                ]
+            }
         }
     }
 ]

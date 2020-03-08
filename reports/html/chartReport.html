@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
+    <title>InfoCorp Sales Report</title>
 </head>
 <style>
 table.minimalistBlack {
@@ -59,34 +59,10 @@ table.minimalistBlack tfoot td {
 </style>
 <body>
 <div class="topnav">
-    <h1 class="topnav h1">{{title}}</h1>
+    <h1 class="topnav h1">InfoCorp Sales Report</h1>
 </div>
-<table class="minimalistBlack">
-<thead>
-    <tr>
-        {% for item in header %}
-            <td>{{item}}</td>
-        {% endfor %}
-    </tr>
-</thead>
-<tbody>
-    {% for row in rows %}
-        <tr>
-            {% for item in rows[row] %}
-                <td>{{item}}</td>
-            {% endfor %}
-        </tr>
-    {% endfor %}
-</tbody>
-<tfoot>
-    <tr>
-        {% for item in footer %}
-            <td>{{item}}</td>
-        {% endfor %}
-    </tr>
-</tfoot>
-</table>
 
-<img src="{{assets}}/{{simpleChart}}" width="700" height="500">
+<img src="./assets/salesGraph.png" width="700" height="500">
+
 </body>
 </html>

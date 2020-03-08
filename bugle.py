@@ -2,6 +2,7 @@ import pdfkit
 import jinja2
 import json
 import argparse
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -17,20 +18,41 @@ def main():
         print(args.template)
         print(args.data)
 
+    # Generate Assets
+    with open('data/' + args.data + '.json') as f:
+        data = json.load(f)[0]
+        assets = []
+        i = 0
+        if 'graphs' in data:
+            for graph in data['graphs']:
+                print(list(graph)[0])
+                createGraph(data['graphs'][graph], graph)
+                assets.append(graph)
+                i += 1
+
+    # Compile Template
     load = jinja2.FileSystemLoader(searchpath="./templates/")
     templateEnv = jinja2.Environment(loader=load)
     TEMPLATE = args.template + '.rpt'
     template = templateEnv.get_template(TEMPLATE)
     with open('data/' + args.data + '.json') as f:
-        data = json.load(f)
+        data = json.load(f)[0]
         tempargs = {}
+        tempargs['assets'] = './assets'
+
+        # Load Asset Variables
+        for item in assets:
+            tempargs[item] = item
+            if args.verbose:
+                print(item)
+
+        # Load Variables
         for index in data:
-            for param in index:
-                tempargs[param] = index[param]
-                if args.verbose:
-                    print(index[param])
-            output = template.render(tempargs)
-            outputHTML(args, output)
+            tempargs[index] = data[index]
+            if args.verbose:
+                print(data[index])
+        output = template.render(tempargs)
+        outputHTML(args, output)
     f.close()
 
     outputPDF(args)
@@ -40,10 +62,30 @@ def outputHTML(args, output):
     html_file = open('reports/html/' + args.output + '.html', 'w')
     html_file.write(output)
     html_file.close()
-    
+
+
 def outputPDF(args):
     pdfkit.from_file('reports/html/' + args.output + '.html', 'reports/pdf/' + args.output + '.pdf')
-    
+
+
+def createGraph(data, name):
+    if data['type'] == 'bar':
+        title = data['title']
+        xindex = data['x']
+        yindex = data['y']
+        xlabel = data['x-label']
+        ylabel = data['y-label']
+
+        chart = plt.figure()
+        axis = chart.add_axes([0, 0, 1, 1])
+        x = data[xindex]
+        y = data[yindex]
+        axis.bar(x, y)
+        axis.set_title(title)
+        axis.set_xlabel(xlabel)
+        axis.set_ylabel(ylabel)
+        chart.savefig('./reports/html/assets/' + name + '.png', dpi=600, bbox_inches='tight')
+
     
 if __name__ == "__main__":
     main()
