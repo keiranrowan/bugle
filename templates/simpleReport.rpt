@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{title}}</title>
+</head>
+<body>
+    <h1>{{title}}</h1>
+
+    <ul id="values">
+        {% for row in rows %}
+            <li><p>{{ rows[row] }}</p></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

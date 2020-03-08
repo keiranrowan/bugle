@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Generic Report",
+        "header": [
+            "Employee ID",
+            "First",
+            "Middle Initial",
+            "Last"
+        ],
+        "footer": [
+            "FOOTER",
+            "FOOTER",
+            "FOOTER",
+            "FOOTER"
+        ],
+        "rows": {
+            "row1": "John",
+            "row2": "Jane ",
+            "row3": "Joe",
+            "row4": "Smith"
+        }
+    }
+]
