@@ -19,6 +19,7 @@ matplotlib
 To create a report you must have data, and that data must have structure. The ```data``` folder is where all JSON data sets are stored. These data sets contain key : value pairs which define variables which will be used in the template. Because JSON can represent many different sets of data, this gives you a lot of freedom when it comes to structuring your data. Below is a sample JSON data file:
 
 ##### data/names.json
+
 ```json
 [
     {
@@ -80,6 +81,80 @@ optional arguments:
   -h, --help     show this help message and exit
   -v, --verbose  Output additional data at runtime
 ```
+
+### Charts
+
+:warning: This feature is a work in progress. Currently only simple bar charts are implemented. :warning:
+
+Bugle can dynamically generate charts based on given data which can be refered to in templates as variables. Below is the chartReport data used to generate the report. 
+
+##### data/stats.json
+
+```json
+[
+    {
+        "title": "InfoCorp Sales Report",
+        "graphs": {
+            "salesGraph" : {
+                "type": "bar",
+                "title": "2000-2008 Sales",
+                "x": "year",
+                "y": "sales",
+                "x-label": "Year",
+                "y-label": "Total Sales",
+                "year": [
+                    2000,
+                    2001,
+                    2002,
+                    2003,
+                    2004,
+                    2005,
+                    2006,
+                    2007,
+                    2008
+                ],
+                "sales": [
+                    450152,
+                    651258,
+                    725158,
+                    612354,
+                    501125,
+                    772890,
+                    490158,
+                    501258,
+                    601258
+                ]
+            }
+        }
+    }
+]
+```
+
+If Bugle finds items under the special variable ```graphs``` then it will attempt to generate a graph based on the given data and settings. The name of the graph i.e. ```salesGraph``` will be the variable name when referenced in the template. If ```type``` matches ```bar``` then Bugle will generate a bar graph. ```title```, ```x```, ```y```, ```x-label```, and ```y-label```, are all special keys. For the keys ```x``` and ```y``` these must be equal to the name of the key containing the data in the chart. Below is the template used to render the chart.
+
+##### templates/chartReport.rpt
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<style>
+<!--- CSS GOES HERE --->
+</style>
+<body>
+<div class="topnav">
+    <h1 class="topnav h1">{{title}}</h1>
+</div>
+
+<img src="{{assets}}/{{salesGraph}}.png" width="700" height="500">
+
+</body>
+</html>
+```
+To include the chart simply reference the ```{{assets}}``` folder and use the variable name of the graph you wish to use. The graph will always be exported as a .png file so make sure to include the extension. 
 
 ### More Examples:
 
