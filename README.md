@@ -86,6 +86,6 @@ optional arguments:
 
 Template | Data | HTML Output | PDF Output
 --- | --- | --- | ---
-[Chart Report](templates/chartReport.rpt) | [Data](data/stats.json) | [HTML](reports/HTML/chartReport.html) | [PDF](reports/PDF/chartReport.pdf)
-[Formatted Report](templates/formattedReport.rpt) | [Data](data/employeeData.json) | [HTML](reports/HTML/formattedReport.html) | [PDF](reports/PDF/formattedReport.pdf)
-[Simple Report](templates/simpleReport.rpt) | [Data](data/names.json) | [HTML](reports/HTML/simpleReport.html) | [PDF](reports/PDF/simpleReport.pdf)
+[Chart Report](templates/chartReport.rpt) | [Data](data/stats.json) | [HTML](reports/html/chartReport.html) | [PDF](reports/pdf/chartReport.pdf)
+[Formatted Report](templates/formattedReport.rpt) | [Data](data/employeeData.json) | [HTML](reports/html/formattedReport.html) | [PDF](reports/pdf/formattedReport.pdf)
+[Simple Report](templates/simpleReport.rpt) | [Data](data/names.json) | [HTML](reports/html/simpleReport.html) | [PDF](reports/pdf/simpleReport.pdf)
