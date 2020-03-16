@@ -84,9 +84,13 @@ optional arguments:
 
 ### Charts
 
-:warning: This feature is a work in progress. Currently only simple bar charts are implemented. :warning:
+:warning: This feature is a work in progress. Currently only simple bar and line charts are implemented. :warning:
 
-Bugle can dynamically generate charts based on given data which can be refered to in templates as variables. Below is the chartReport data used to generate the report. 
+Bugle can dynamically generate charts based on given data which can be refered to in templates as variables. 
+
+#### Bar Chart
+
+Below is the chartReport data used to generate the report. 
 
 ##### data/stats.json
 
@@ -155,6 +159,93 @@ If Bugle finds items under the special variable ```graphs``` then it will attemp
 </html>
 ```
 To include the chart simply reference the ```{{assets}}``` folder and use the variable name of the graph you wish to use. The graph will always be exported as a .png file so make sure to include the extension. 
+
+### Line Chart
+
+Below is the lineStats data used to generate the report. 
+
+##### data/lineStats.json
+
+```json
+[
+    {
+        "title": "InfoCorp Sales Report",
+        "graphs": {
+            "salesGraph" : {
+                "type": "line",
+                "title": "2000-2008 Sales",
+                "x": "year",
+                "lines": {
+                    "Total Sales":"sales",
+                    "Supply": "supply"
+                },
+                "x-label": "Year",
+                "y-label": "Units (Millions)",
+                "year": [
+                    2000,
+                    2001,
+                    2002,
+                    2003,
+                    2004,
+                    2005,
+                    2006,
+                    2007,
+                    2008
+                ],
+                "sales": [
+                    450152,
+                    651258,
+                    725158,
+                    612354,
+                    501125,
+                    772890,
+                    490158,
+                    501258,
+                    601258
+                ],
+                "supply": [
+                    1450190,
+                    1651258,
+                    1725158,
+                    1612354,
+                    1501125,
+                    1772890,
+                    1490158,
+                    1501258,
+                    1601258
+                ]
+            }
+        }
+    }
+]
+```
+
+If Bugle finds items under the special variable ```graphs``` then it will attempt to generate a graph based on the given data and settings. The name of the graph i.e. ```salesGraph``` will be the variable name when referenced in the template. If ```type``` matches ```line``` then Bugle will generate a line graph. ```title```, ```x```, ```lines```, ```x-label```, and ```y-label```, are all special keys. For the keys ```x```  must be equal to the name of the key containing the data in the chart. ```lines``` contains key : value pairs which are in the format ```Name```:```Data Set``` Below is the template used to render the chart.
+
+##### templates/chartReport.rpt
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<style>
+<!--- CSS GOES HERE --->
+</style>
+<body>
+<div class="topnav">
+    <h1 class="topnav h1">{{title}}</h1>
+</div>
+
+<img src="{{assets}}/{{salesGraph}}.png" width="700" height="500">
+
+</body>
+</html>
+```
+To include the chart simply reference the ```{{assets}}``` folder and use the variable name of the graph you wish to use. The graph will always be exported as a .png file so make sure to include the extension. 
+
 
 ### More Examples:
 
