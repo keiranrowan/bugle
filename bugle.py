@@ -85,6 +85,33 @@ def createGraph(data, name):
         axis.set_xlabel(xlabel)
         axis.set_ylabel(ylabel)
         chart.savefig('./reports/html/assets/' + name + '.png', dpi=600, bbox_inches='tight')
+    elif data['type'] == 'line':
+        title = data['title']
+        lines = []
+        labels = []
+        for line in data['lines']:
+            labels.append(line)
+            lines.append(data[data['lines'][line]])
+
+        print(lines)
+        print(labels)
+        xindex = data['x']
+        xlabel = data['x-label']
+        ylabel = data['y-label']
+
+        chart = plt.figure()
+        axis = chart.add_axes([0, 0, 1, 1])
+        x = data[xindex]
+        i = 0
+
+        for line in lines:
+            axis.plot(x, lines[i], label=labels[i])
+            i += 1
+        axis.set_title(title)
+        axis.set_xlabel(xlabel)
+        axis.set_ylabel(ylabel)
+        chart.savefig('./reports/html/assets/' + name + '.png', dpi=600, bbox_inches='tight')
+  #  elif data['type'] == 'histogram':
 
     
 if __name__ == "__main__":
